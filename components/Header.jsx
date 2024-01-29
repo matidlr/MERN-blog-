@@ -5,10 +5,12 @@ import {AiOutlineSearch} from 'react-icons/ai';
 import {FaMoon, FaSun} from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleTheme } from '../src/redux/theme/themeSlice';
+import { signoutSuccess } from '../src/redux/user/userSlice';
+
 
 export default function Header() {
   const path = useLocation().pathname;
-  const dispatch = useDispatch().pathname;
+  const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
   const { theme } = useSelector((state) => state.theme);
   return (
@@ -55,7 +57,7 @@ export default function Header() {
                  <Dropdown.Item>Profile</Dropdown.Item>
               </Link>
               <Dropdown.Divider/>
-              <Dropdown.Item>Sign out</Dropdown.Item>
+              <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
           </Dropdown>
         ):
         (
