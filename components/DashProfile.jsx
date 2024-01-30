@@ -20,6 +20,7 @@ import { updateStart,
          signoutSuccess } from '../src/redux/user/userSlice';
 import { UseDispatch } from 'react-redux';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import { Link} from 'react-router-dom'
 
 export default function DashProfile() {
     const {currentUser, error} =useSelector(state => state.user);
@@ -216,9 +217,23 @@ export default function DashProfile() {
                />
            <Button type='submit' 
                    gradientDuoTone='purpleToBlue' 
-                   outline>
-             Update
+                   outline
+                   disabled={loading || imageFileUploading}>
+             {loading ? 'Loading...' : 'Update'}
            </Button>
+           {
+            currentUser.isAdmin && (
+              <Link to={'create-post'}>
+                <Button
+                    type='button'
+                    gradientDuoTone='purpleToPink'
+                    className='w-full'
+                    >
+                      Create a post
+                </Button>
+              </Link>
+            )
+           }
        </form>
        <div className="text-red-500 flex justify-between mt-5">
         <span onClick={()=>setShowModal(true)} className='cursor-pointer'>Delete Account</span>
